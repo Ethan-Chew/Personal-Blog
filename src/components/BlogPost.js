@@ -7,14 +7,16 @@ import {
     Badge,
     Text,
     LinkBox,
+    useColorMode
 } from "@chakra-ui/react"
 import Link from 'next/link'
 
 export default function BlogPost({boxProperty}) {
+    const { colorMode } = useColorMode()
     const unixWeek = 604800000
 
     return (
-        <LinkBox as="article" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+        <LinkBox as="article" maxW="sm" minW="xs" border={colorMode === "light" ? "1px #EDF2F7 solid" : "1px grey solid"} boxShadow={colorMode === "light" ? "lg" : ""} borderRadius="lg" overflow="hidden">
             <Link href="/posts/[id]" as={`/posts/${boxProperty.id}`}>
                 <VStack alignItems="left" m={[3, 3, 3, 3]} spacing={2}>
                     <VStack alignItems="left" spacing={0}>

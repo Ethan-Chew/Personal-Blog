@@ -2,13 +2,13 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC2Wc0NxNkVWX-5uAadIDrHZTF8d8Av43I",
-    authDomain: "ethanchewblog.firebaseapp.com",
-    projectId: "ethanchewblog",
-    storageBucket: "ethanchewblog.appspot.com",
-    messagingSenderId: "198313002287",
-    appId: "1:198313002287:web:75e9294012b0f92dd04dda",
-    measurementId: "G-8T5R24YHHD"
+    apiKey: process.env.FIREBASE_APIKEY,
+    authDomain: process.env.FIREBASE_AUTHDOMAIN,
+    projectId: process.env.FIREBASE_PROJID,
+    storageBucket: process.env.FIREBASE_STORAGEBUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
+    appId: process.env.FIREBASE_APPID,
+    measurementId: process.env.FIREBASE_MEASUREMENTID
 }
 
 const app = initializeApp(firebaseConfig)
