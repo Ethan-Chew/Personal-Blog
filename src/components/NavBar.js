@@ -23,13 +23,14 @@ const Pages = [
   {
     id: "Home", 
     href: "/"
-  }, {
-    id: "Website",
-    href: "www.ethanchew.com"
-  }, {
-    id: "Profile",
-    href: "profile.ethanchew.com"
   }]
+  // , {
+  //   id: "Website",
+  //   href: "www.ethanchew.com"
+  // }, {
+  //   id: "Profile",
+  //   href: "profile.ethanchew.com"
+  // }]
 
 const NavLink = ({ children }) => (
   <Link
