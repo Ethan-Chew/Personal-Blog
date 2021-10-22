@@ -14,7 +14,7 @@ function App({ Component, pageProps }) {
   return(
       <ChakraProvider theme={theme}>
         <NavBar />
-        <VStack spacing={50}>
+        <VStack spacing={50} mt={5}>
             <Component {...pageProps} />
         </VStack>
       </ChakraProvider>
