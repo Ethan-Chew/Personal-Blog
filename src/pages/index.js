@@ -6,46 +6,19 @@ import {
     SimpleGrid,
 } from '@chakra-ui/react'
 import BlogPost from "../components/BlogPost";
-import styles from '../styles/Home.module.css'
-import Simple from "../components/NavBar";
+import { useEffect, useState } from "react";
+import { onSnapshot, collection } from "firebase/firestore";
+import db from './api/firebase.js'
 
 export default function Home() {
-    const boxProperty = [{
-        title: "Test Test",
-        type: "Programming",
-        bText: "Yesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyes",
-        dateUploaded: "22 Oct 2021",
-        msUNIX: 1634899831539,
-        content: "blah blah blah blah blah",
-    }, {
-        title: "Test Test",
-        type: "Programming",
-        bText: "Yesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyes",
-        dateUploaded: "22 Oct 2021",
-        msUNIX: 1634899831539,
-        content: "blah blah blah blah blah",
-    }, {
-        title: "Test Test",
-        type: "Programming",
-        bText: "Yesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyes",
-        dateUploaded: "22 Oct 2021",
-        msUNIX: 1634899831539,
-        content: "blah blah blah blah blah",
-    }, {
-        title: "Test Test",
-        type: "Programming",
-        bText: "Yesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyes",
-        dateUploaded: "22 Oct 2021",
-        msUNIX: 1634899831539,
-        content: "blah blah blah blah blah",
-    }, {
-        title: "Test Test",
-        type: "Programming",
-        bText: "Yesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyesyes",
-        dateUploaded: "22 Oct 2021",
-        msUNIX: 1634899831539,
-        content: "blah blah blah blah blah",
-    }]
+    const [boxProperty, setBoxProperty] = useState([])
+
+    useEffect(() => {
+        document.title = "Ethan Chew | Blog"
+        onSnapshot(collection(db, "posts"), (data) => {
+            setBoxProperty(data.docs.map((doc) => doc.data()))
+        })
+    }, [])
 
     return (
         <Box>
