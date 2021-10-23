@@ -22,7 +22,7 @@ export default function Footer() {
                     Open sourced on{" "}
                     <Link color={colorMode === "light" ? "#2B6CB0" : "#90CDF4"} href="" target="_blank" rel="noreferrer">GitHub</Link>
                     .{" "}
-                    Last Updated: August 2021
+                    Last Updated: October 2021
                 </Text>
             </Container>
         </Box>
