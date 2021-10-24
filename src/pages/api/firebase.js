@@ -11,6 +11,10 @@ const firebaseConfig = {
     measurementId: process.env.FIREBASE_MEASUREMENTID
 }
 
+if (firebaseConfig.apiKey === undefined) {
+    console.error("API Key Missing/Corrupted")
+}
+
 const app = initializeApp(firebaseConfig)
 
 export default getFirestore()
