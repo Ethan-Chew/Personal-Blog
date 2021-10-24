@@ -1,4 +1,4 @@
-import("dotenv").then((o)=> o.config())
+import("dotenv").then((o)=> o.config({path: __dirname + '/.env.local'}))
 
 module.exports = {
   reactStrictMode: true,

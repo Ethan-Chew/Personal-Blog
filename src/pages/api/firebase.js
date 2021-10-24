@@ -3,14 +3,36 @@ import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_APIKEY,
-    authDomain: process.env.FIREBASE_AUTHDOMAIN,
-    projectId: process.env.FIREBASE_PROJID,
-    storageBucket: process.env.FIREBASE_STORAGEBUCKET,
-    messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
-    appId: process.env.FIREBASE_APPID,
-    measurementId: process.env.FIREBASE_MEASUREMENTID
+    authDomain: "ethanchewpblog.firebaseapp.com",
+    projectId: "ethanchewpblog",
+    storageBucket: "ethanchewpblog.appspot.com",
+    messagingSenderId: "949351827892",
+    appId: "1:949351827892:web:e0baa5ada29df335ec8ae1",
+    measurementId: "G-K1PMJMRBND"
 }
 
-const app = initializeApp(firebaseConfig)
+if (firebaseConfig.apiKey === undefined) {
+    console.error("API Key Missing/Corrupted")
+} else {
+    console.log("API Key Loaded")
+}
 
-export default getFirestore()
+try {
+    const app = initializeApp(firebaseConfig)
+    console.log("Initalized Firebase")
+} catch (error) {
+    console.error("Error in Initalizing Firebase")
+    console.log(error)
+}
+
+let getFire = undefined
+
+try {
+    getFire = getFirestore()
+    console.log("Initalized Cloud Firestore")
+} catch (error) {
+    console.error("Error in Getting Firestore")
+    console.error(error)
+}
+
+export default getFire
