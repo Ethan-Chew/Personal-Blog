@@ -41,7 +41,7 @@ const NavLink = ({ children }) => (
       textDecoration: 'none',
       bg: useColorModeValue('gray.200', 'gray.700'),
     }}
-    href={children.href} isExternal >
+    href={children.href} >
     {children.id}
   </Link>
 );

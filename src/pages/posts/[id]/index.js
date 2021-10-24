@@ -25,6 +25,7 @@ export default function blogPost({}) {
         })
         document.title = "Ethan Chew | " + currentPost.title
     })
+
     return (
         <Box>
             <VStack alignItems="left" maxW={900} spacing={10}>
@@ -44,8 +45,15 @@ export default function blogPost({}) {
                         <Text px={2} py={1} rounded="md" backgroundColor={useColorModeValue('gray.200', 'gray.700')}>{currentPost.type}</Text>
                     </HStack>
                 </VStack>
-
-                <Text>{currentPost.content}</Text>
+                        
+                {String(currentPost.content).split("\\n").map((val) => {
+                    return(
+                        <span>
+                            {val}
+                            <br />
+                        </span>
+                    )
+                })}
             </VStack>
         </Box>
     )
