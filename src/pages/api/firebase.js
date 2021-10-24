@@ -3,12 +3,12 @@ import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_APIKEY,
-    authDomain: process.env.FIREBASE_AUTHDOMAIN,
-    projectId: process.env.FIREBASE_PROJID,
-    storageBucket: process.env.FIREBASE_STORAGEBUCKET,
-    messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
-    appId: process.env.FIREBASE_APPID,
-    measurementId: process.env.FIREBASE_MEASUREMENTID
+    authDomain: "ethanchewpblog.firebaseapp.com",
+    projectId: "ethanchewpblog",
+    storageBucket: "ethanchewpblog.appspot.com",
+    messagingSenderId: "949351827892",
+    appId: "1:949351827892:web:e0baa5ada29df335ec8ae1",
+    measurementId: "G-K1PMJMRBND"
 }
 
 if (firebaseConfig.apiKey === undefined) {
