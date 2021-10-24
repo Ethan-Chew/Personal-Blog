@@ -13,8 +13,26 @@ const firebaseConfig = {
 
 if (firebaseConfig.apiKey === undefined) {
     console.error("API Key Missing/Corrupted")
+} else {
+    console.log("API Key Loaded")
 }
 
-const app = initializeApp(firebaseConfig)
+try {
+    const app = initializeApp(firebaseConfig)
+    console.log("Initalized Firebase")
+} catch (error) {
+    console.error("Error in Initalizing Firebase")
+    console.log(error)
+}
 
-export default getFirestore()
+let getFire = undefined
+
+try {
+    getFire = getFirestore()
+    console.log("Initalized Cloud Firestore")
+} catch (error) {
+    console.error("Error in Getting Firestore")
+    console.error(error)
+}
+
+export default getFire

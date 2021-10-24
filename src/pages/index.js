@@ -2,7 +2,7 @@ import {
     Box,
     Heading,
     VStack,
-    HStack,
+    Text,
     SimpleGrid,
 } from '@chakra-ui/react'
 import BlogPost from "../components/BlogPost";
@@ -24,9 +24,11 @@ export default function Home() {
         <Box>
             <Heading mb={50}>Ethan Chew's Blog</Heading>
             <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
-                {boxProperty.map((property) => (
-                    <BlogPost key={property.title} boxProperty={property} />
-                ))}
+                {(boxProperty.length === 0) ? <Text>No posts at the moment! Check back soon!</Text> :
+                    boxProperty.map((property) => (
+                        <BlogPost key={property.title} boxProperty={property} />
+                    ))
+                }
             </SimpleGrid>
         </Box>
     )
