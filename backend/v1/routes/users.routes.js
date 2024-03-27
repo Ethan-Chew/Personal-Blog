@@ -11,6 +11,9 @@ usersRouter.route("/:id")
     .get(UsersController.apiGetUser)
     .patch(UsersController.apiUpdateUser)
 
+usersRouter.route("/:id/blogs")
+    .get(UsersController.apiGetBlogsWUser)
+
 usersRouter.route("/register")
     .post(UsersController.apiRegisterUser)
 

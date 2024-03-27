@@ -18,4 +18,10 @@ export default class UsersController {
     static async apiUpdateUser() {
         
     }
+
+    static async apiGetBlogsWUser(req, res) {
+        const { id } = req.params
+
+        console.log(id)
+    }
 }

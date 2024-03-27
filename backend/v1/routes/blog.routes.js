@@ -10,7 +10,7 @@ blogRouter.route("/")
     
 blogRouter.route("/:id")
     .get(BlogController.apiGetBlog)
-    .patch(BlogController.apiUpdateBlog)    
+    .put(BlogController.apiUpdateBlog)    
     .delete(BlogController.apiDeleteBlog)
 
 export default blogRouter

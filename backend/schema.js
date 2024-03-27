@@ -21,7 +21,8 @@ const BlogSchema = new mongoose.Schema({
         enum: ['Tech', 'Aviation', 'Dev'],
         default: 'Dev',
         required: true,
-    }
+    },
+    owner: { type: String, required: true }
 })
 
 // Models
