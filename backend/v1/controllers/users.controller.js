@@ -1,13 +1,11 @@
+import { User } from "../../schema.js"
+
 export default class UsersController {
     static async apiGetAllUsers() {
 
     }
 
     static async apiGetUser() {
-
-    }
-
-    static async apiRegisterUser() {
 
     }
 

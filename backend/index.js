@@ -1,16 +1,19 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
 
 // Routes
 import BlogRoutes from './v1/routes/blog.routes.js'
-import UserRoute from './v1/routes/users.routes.js'
+import UserRoutes from './v1/routes/users.routes.js'
+import AuthRoutes from './v1/routes/auth.routes.js'
 
 dotenv.config()
 
 // Server Config
 const app = express()
 app.use(express.json())
+app.use(cookieParser())
 
 // Connect to Database
 const connectDB = async () => {
@@ -27,7 +30,8 @@ const connectDB = async () => {
 
 // App Routes
 app.use('/v1/blog', BlogRoutes)
-app.use('/v1/users', UserRoute)
+app.use('/v1/users', UserRoutes)
+app.use('/v1/auth', AuthRoutes)
 
 // Default
 app.use("*", (req, res) => res.status(404).json({error: "Not Found"}))

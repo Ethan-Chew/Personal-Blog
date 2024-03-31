@@ -1,6 +1,10 @@
-import { Blog, User } from "../../schema.js"
+import { Blog } from "../../schema.js"
 import { Types } from "mongoose"
 import { NotFoundException } from "../../errors.js"
+import * as jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export default class BlogController {
     static async apiGetAllBlogs(req, res) {
@@ -87,8 +91,6 @@ export default class BlogController {
 
     static async apiCreateBlog(req, res) {
         try {
-            // TODO: Authenticate User
-
             // Create Blog
             const newBlog = new Blog(req.body)
             const creationResult = await newBlog.save()
