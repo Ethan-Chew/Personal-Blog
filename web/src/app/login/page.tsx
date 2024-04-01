@@ -1,27 +1,59 @@
 'use client'
 import axios from "axios";
 import Navbar from "@/components/navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import authorise from "@/helper/authorise";
 
 export default function Login() {
+    // State Variables
     const [ username, setUsername ] = useState("")
     const [ password, setPassword ] = useState("")
     const [ err, setErr ] = useState("")
+    const [ awaitRes, setAwaitRes ] = useState(false)
+    const router = useRouter()
     
+    // Check if User is already Logged In
+    useEffect(() => {
+        authorise().then(() => {
+            router.push("/")
+        })
+    }, [])
+
     async function handleSignIn() {
         try {
+            setAwaitRes(true)
 
+            const signinResponse = await axios.post("http://localhost:8080/v1/auth/login", {
+                "username": username,
+                "password": password,
+            }, {
+                withCredentials: true
+            })
+
+            switch (signinResponse.status) {
+                case 401:
+                    setErr("Incorrect Password. Try again.")
+                case 404:
+                    setErr("Account not found.")
+                case 200:
+                    router.push("/")
+                default:
+                    setErr("Unknown Error.")
+            }
         } catch (e) {
-
+            setErr("Unknown Error.")
         }
+
+        setAwaitRes(false)
     }
 
     return (
-        <main className="h-screen bg-white text-black">
+        <main className="flex flex-col h-screen bg-white text-black">
             <Navbar />
 
-            <div className="flex flex-col justify-center items-center w-screen h-[100%] gap-6">
+            <div className="flex flex-col flex-1 justify-center items-center w-screen gap-6">
                 <div className="flex flex-col gap-4 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] rounded-xl py-8 px-8 w-[70%] md:w-[50%]">
                     <div>
                         <h2 className="text-2xl font-semibold">Sign in</h2>
@@ -53,7 +85,7 @@ export default function Login() {
                     </div>
 
 
-                    <button className="bg-blue-600 hover:bg-blue-700 duration-300 text-white py-2 rounded-lg" onClick={handleSignIn}>
+                    <button className="bg-blue-600 hover:bg-blue-700 duration-300 text-white py-2 rounded-lg" onClick={handleSignIn} disabled={awaitRes} type="submit">
                         Sign in
                     </button>
                 </div>

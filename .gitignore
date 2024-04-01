@@ -1,4 +1,8 @@
 backend/.env
 backend/node_modules
+backend/package-lock.json
 web/node_modules
+web/.env
+web/.next
+web/package-lock.json
 .DS_Store

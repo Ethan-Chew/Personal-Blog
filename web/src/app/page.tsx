@@ -1,10 +1,10 @@
 'use client'
 import Navbar from "@/components/navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [ userEmail, setUserEmail ] = useState("")
-  
+
   return (
     <main className="flex flex-col bg-white min-h-screen">
       <Navbar />

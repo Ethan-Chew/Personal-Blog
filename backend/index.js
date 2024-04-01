@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import cors from "cors"
 import cookieParser from 'cookie-parser'
 
 // Routes
@@ -14,6 +15,9 @@ dotenv.config()
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
+app.use(cors({
+    credentials: true
+}))
 
 // Connect to Database
 const connectDB = async () => {

@@ -1,7 +1,6 @@
 import { Blog } from "../../schema.js"
 import { Types } from "mongoose"
 import { NotFoundException } from "../../errors.js"
-import * as jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 
 dotenv.config()

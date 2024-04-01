@@ -1,10 +1,36 @@
 import { User } from "../../schema.js"
-import * as jwt from 'jsonwebtoken'
+import pkg from "jsonwebtoken"
 import dotenv from 'dotenv'
 
 dotenv.config()
+const { sign, verify } = pkg;
 
 export default class AuthController {
+    static async apiAuthoriseUser(req, res) {
+        try {
+            const token = req.cookies.jwt
+            if (!token) {
+                throw {
+                    statusCode: 401,
+                    msg: "JWT Token not found"
+                }
+            }
+
+            verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+                if (err || decodedToken.role !== "Admin") {
+                    throw {
+                        statusCode: 401,
+                        msg: "Unauthorised"
+                    }
+                }
+
+                res.status(200).json({ status: "success" })
+            })
+        } catch (err) {
+            res.status(err.statusCode ? err.statusCode : 500).json({ error: err.msg ? err.msg : err.message })
+        }
+    }
+
     static async apiRegisterUser(req, res) {
         try {
             const createBody = new User(req.body)
@@ -31,7 +57,7 @@ export default class AuthController {
 
             // Create JWT
             const tokenMaxAge = 10800 // 3 hours (seconds)
-            const token = jwt.sign(
+            const token = await sign(
                 { id: registerUserRes._id, username: createBody.username, role: createBody.role },
                 process.env.JWT_SECRET,
                 {
@@ -79,13 +105,14 @@ export default class AuthController {
 
             // Create JWT
             const tokenMaxAge = 10800 // 3 hours (seconds)
-            const token = jwt.sign(
+            const token = await sign(
                 { id: dbUser._id, username: dbUser.username, role: dbUser.role },
                 process.env.JWT_SECRET,
                 {
                     expiresIn: tokenMaxAge
                 }
             )
+
             res.cookie("jwt", token, {
                 httpOnly: true,
                 maxAge: tokenMaxAge * 1000, // 3 hours (ms)
