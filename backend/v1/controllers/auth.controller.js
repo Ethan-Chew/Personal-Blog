@@ -7,6 +7,7 @@ const { sign, verify } = pkg;
 
 export default class AuthController {
     static async apiAuthoriseUser(req, res) {
+        // Verify the user's role
         try {
             const token = req.cookies.jwt
             if (!token) {
@@ -17,14 +18,14 @@ export default class AuthController {
             }
 
             verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-                if (err || decodedToken.role !== "Admin") {
+                if (err) {
                     throw {
                         statusCode: 401,
                         msg: "Unauthorised"
                     }
                 }
 
-                res.status(200).json({ status: "success" })
+                res.status(200).json({ status: "success", "role": decodedToken.role })
             })
         } catch (err) {
             res.status(err.statusCode ? err.statusCode : 500).json({ error: err.msg ? err.msg : err.message })

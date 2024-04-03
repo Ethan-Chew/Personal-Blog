@@ -22,7 +22,8 @@ const BlogSchema = new mongoose.Schema({
         default: 'Dev',
         required: true,
     },
-    owner: { type: String, required: true }
+    owner: { type: String, required: true },
+    isDraft: { type: Boolean, required: true, default: true }
 })
 
 // Models

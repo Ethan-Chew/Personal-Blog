@@ -1,9 +1,18 @@
+'use effect'
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import authoriseUser from "@/helper/authorise";
 
 export default function Navbar() {
     // Check if User is already Logged In
-    // const authStatus = await authorise()
-    const authStatus = true
+    const [ authStatus, setAuthStatus ] = useState(false)
+    useEffect(() => {
+        authoriseUser().then((res) => {
+            if (res) {
+                setAuthStatus(res)
+            }
+        })
+    }, [])
 
     return (
         <nav className="text-black w-screen shadow-md py-2 px-6">

@@ -2,13 +2,27 @@ import { Blog } from "../../schema.js"
 import { Types } from "mongoose"
 import { NotFoundException } from "../../errors.js"
 import dotenv from 'dotenv'
+import pkg from "jsonwebtoken"
 
 dotenv.config()
+const { verify } = pkg
 
 export default class BlogController {
     static async apiGetAllBlogs(req, res) {
         try {
-            const allBlogs = await Blog.find()
+            let filter = {}
+
+            // If user is admin, display drafted posts
+            if (req.cookies.jwt) {
+                verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decodedToken) => {
+                    if (decodedToken.role !== "Admin") {
+                        filter = { isDraft: false }
+                    }
+                })
+            }
+
+            // Get all posts
+            const allBlogs = await Blog.find(filter)
 
             res.status(200).json(allBlogs)
         } catch (err) {
@@ -41,8 +55,6 @@ export default class BlogController {
         try {
             const { id } = req.params
 
-            // TODO: Authenticate User 
-
             // Validate Update Response
             const updateBody = req.body
             const updateModelAttr = Object.keys(Blog.schema.paths)
@@ -72,8 +84,6 @@ export default class BlogController {
     static async apiDeleteBlog(req, res) {
         try {
             const { id } = req.params
-
-            // TODO: Authenticate User
 
             // Delete Blog
             const deleteResult = await Blog.deleteOne({ _id: id })

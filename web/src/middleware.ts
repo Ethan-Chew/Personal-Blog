@@ -11,7 +11,8 @@ export async function middleware(req: NextRequest) {
             "Cookie": `jwt=${token}`
         }
     })
-    if (authorisationReq.status !== 200) {
+    const authReqBody = await authorisationReq.json()
+    if (authorisationReq.status !== 200 || authReqBody.role !== "Admin") {
         return NextResponse.redirect(new URL("/login", req.url))
     }
 
