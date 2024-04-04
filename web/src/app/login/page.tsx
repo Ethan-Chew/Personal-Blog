@@ -16,8 +16,15 @@ export default function Login() {
     
     // Check if User is already Logged In
     useEffect(() => {
-        authorise().then(() => {
-            router.push("/")
+        authorise().then((res) => {
+            if (res.status !== "failure") {
+                if (res.role === "Reader") {
+                    // Redirect to Unauthorised Page
+                    router.push("/unauthorised")
+                }
+                // Redirect to Home
+                router.push("/")
+            }            
         })
     }, [])
 
@@ -27,7 +34,7 @@ export default function Login() {
 
             const signinResponse = await axios.post("http://localhost:8080/v1/auth/login", {
                 "username": username,
-                "password": password,
+                "password": password, // TODO: Send encrypted password
             }, {
                 withCredentials: true
             })
@@ -50,9 +57,7 @@ export default function Login() {
     }
 
     return (
-        <main className="flex flex-col h-screen bg-white text-black">
-            <Navbar />
-
+        <main className="flex flex-col h-screen bg-white text-black z-0">
             <div className="flex flex-col flex-1 justify-center items-center w-screen gap-6">
                 <div className="flex flex-col gap-4 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] rounded-xl py-8 px-8 w-[70%] md:w-[50%]">
                     <div>

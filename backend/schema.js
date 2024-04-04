@@ -17,9 +17,9 @@ const BlogSchema = new mongoose.Schema({
     body: { type: String, required: true },
     dateCreated: { type: String, default: Date.now, required: true },
     tags: {
-        type: String,
+        type: [String],
         enum: ['Tech', 'Aviation', 'Dev'],
-        default: 'Dev',
+        default: ['Dev'],
         required: true,
     },
     owner: { type: String, required: true },

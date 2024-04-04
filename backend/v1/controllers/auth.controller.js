@@ -9,6 +9,7 @@ export default class AuthController {
     static async apiAuthoriseUser(req, res) {
         // Verify the user's role
         try {
+            console.log(req)
             const token = req.cookies.jwt
             if (!token) {
                 throw {
@@ -25,7 +26,7 @@ export default class AuthController {
                     }
                 }
 
-                res.status(200).json({ status: "success", "role": decodedToken.role })
+                res.status(200).json({ status: "success", "role": decodedToken.role, "id": decodedToken.id })
             })
         } catch (err) {
             res.status(err.statusCode ? err.statusCode : 500).json({ error: err.msg ? err.msg : err.message })
@@ -118,6 +119,16 @@ export default class AuthController {
                 httpOnly: true,
                 maxAge: tokenMaxAge * 1000, // 3 hours (ms)
             });
+
+            res.status(200).json({ status: "success" })
+        } catch (err) {
+            res.status(err.statusCode ? err.statusCode : 500).json({ error: err.msg ? err.msg : err.message })
+        }
+    }
+
+    static async apiLogoutUser(req, res) {
+        try {
+            res.cookie("jwt", "", { maxAge: "1" })
 
             res.status(200).json({ status: "success" })
         } catch (err) {

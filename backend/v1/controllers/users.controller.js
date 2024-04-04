@@ -21,7 +21,7 @@ export default class UsersController {
                 throw new Error("Invalid Object ID")
             }
 
-            const userRequest = await User.findById(userId)
+            const userRequest = await User.findById(userId).exec()
 
             if (userRequest === null) {
                 throw new NotFoundException(userId)

@@ -1,8 +1,15 @@
+import axios from "axios"
+
 export default async function authoriseUser() {
-    const authorisationReq = await fetch("http://localhost:8080/v1/auth", {
-        credentials: "include"
-    })
-    const authReqBody = await authorisationReq.json()
-    if (authorisationReq.status === 200 && authReqBody.role === "Reader") return true
-    else return false
+    try {
+        const authorisationReq = await axios.get("http://localhost:8080/v1/auth", {
+            withCredentials: true
+        })
+
+        const authReqBody = await authorisationReq.data
+        if (authorisationReq.status === 200) return authReqBody
+        else return { status: "failure" }
+    } catch (err) {
+        // console.log(err)
+    }
 }

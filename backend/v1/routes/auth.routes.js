@@ -9,6 +9,9 @@ authRouter.route("/")
 authRouter.route("/login")
     .post(AuthController.apiLoginUser)
 
+authRouter.route("/logout")
+    .get(AuthController.apiLogoutUser)
+
 authRouter.route("/register")
     .post(AuthController.apiRegisterUser)
 
