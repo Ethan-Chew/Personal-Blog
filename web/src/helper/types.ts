@@ -11,7 +11,9 @@ interface Blog {
     dateCreated: String,
     tags: [String],
     owner: String,
-    isDraft: Boolean
+    isDraft: Boolean,
+    wordCount: Number,
+    totalTime: Number
 }
 
 export type { User, Blog }

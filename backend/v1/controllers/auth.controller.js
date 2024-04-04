@@ -9,7 +9,6 @@ export default class AuthController {
     static async apiAuthoriseUser(req, res) {
         // Verify the user's role
         try {
-            console.log(req)
             const token = req.cookies.jwt
             if (!token) {
                 throw {

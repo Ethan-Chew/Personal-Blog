@@ -16,7 +16,14 @@ export async function middleware(req: NextRequest) {
         return NextResponse.redirect(new URL("/login", req.url))
     }
 
-    return NextResponse.next()
+    const headers = new Headers(req.headers);
+    headers.set('userid', authReqBody.id);
+
+    return NextResponse.next({
+        request: {
+            headers
+        }
+    })
 }
  
 export const config = {

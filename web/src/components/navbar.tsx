@@ -9,7 +9,7 @@ export default async function Navbar() {
         headers: {
             Cookie: cookies().toString()
         }
-    })
+    }).catch(err => console.log(err))
     let authStatus = false
     if (authResponse) {
         authStatus = true
@@ -26,7 +26,7 @@ export default async function Navbar() {
                                 Profile
                             </button>
                         </Link>
-                        {authResponse.data.role === "Admin" ? 
+                        {authResponse!.data.role === "Admin" ? 
                             <Link href="/admin">
                                 <button className="bg-blue-600 hover:bg-blue-700 text-white rounded-md px-6 py-2">
                                     Admin
