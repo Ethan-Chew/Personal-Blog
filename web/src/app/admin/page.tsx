@@ -1,5 +1,4 @@
 import axios from "axios"
-import Navbar from "@/components/navbar"
 import Link from "next/link"
 import { headers, cookies } from 'next/headers'
 import { User, Blog } from "@/helper/types"

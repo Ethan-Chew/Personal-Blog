@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-color-mode="light">
       <body className={`bg-white min-h-screen ${inter.className}`}>
         {/* <Navbar /> */}
         {children}

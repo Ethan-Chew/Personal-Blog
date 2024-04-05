@@ -1,19 +1,29 @@
 interface User {
-    username: String,
-    password: String,
-    email: String,
+    username: string,
+    password: string,
+    email: string,
     role: "Reader" | "Admin",
 }
 
 interface Blog {
-    title: String,
-    body: String,
-    dateCreated: String,
-    tags: [String],
-    owner: String,
+    title: string,
+    body: string,
+    dateCreated: string,
+    tags: string[],
+    owner: string,
     isDraft: Boolean,
     wordCount: Number,
     totalTime: Number
 }
 
-export type { User, Blog }
+type BlogCreation = Omit<Blog, "dateCreated" | "owner" | "wordCount">
+
+const blogTags = [
+    { label: "Aviation ✈️", value: "aviation" },
+    { label: "Development 💻", value: "dev" },
+    { label: "School 🏫", value: "school" },
+    { label: "Life 📅", value: "life" },
+]
+
+export type { User, Blog, BlogCreation }
+export { blogTags }
