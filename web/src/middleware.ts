@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
  
 // Verify if the user is an admin before allowing access
 export async function middleware(req: NextRequest) {

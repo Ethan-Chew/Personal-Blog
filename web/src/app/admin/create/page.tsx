@@ -5,8 +5,10 @@ import { BlogCreation, blogTags } from "@/helper/types"
 import Toggle from "react-toggle"
 import { MultiSelect, Option } from "react-multi-select-component";
 import MarkdownEditor from "@uiw/react-markdown-editor"
+import { useRouter } from "next/navigation"
 
 export default function CreatePost() {
+    const router = useRouter()
     const [ tags, setTags ] = useState<Option[]>([])
     const [ allowCreate, setAllowCreate ] = useState(false)
     const [ writtenBlog, setWrittenBlog ] = useState<BlogCreation>({
@@ -36,14 +38,21 @@ export default function CreatePost() {
     // Handle Blog Creation
     async function createBlog() {
         try {
-            const createRequest = await axios.post("", {
+            const createRequest = await axios.post("http://localhost:8080/v1/blog", {
                 ...writtenBlog,
-                
+                "dateCreated": Date.now(),
+                "wordCount": writtenBlog.body.split(" ").length
             }, {
                 withCredentials: true
             })
-        } catch (err) {
 
+            if (writtenBlog.isDraft) {
+                router.push("/admin")
+            } else {
+                router.push(`/blog/${createRequest.data.id}`)
+            }
+        } catch (err) {
+            console.log(err)
         }
     }
 

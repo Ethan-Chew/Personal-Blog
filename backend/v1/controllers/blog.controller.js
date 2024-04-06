@@ -100,9 +100,20 @@ export default class BlogController {
 
     static async apiCreateBlog(req, res) {
         try {
+            let userid = ""
+            if (req.cookies.jwt) {
+                verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decodedToken) => {
+                    userid = decodedToken.id
+                })
+            }
+            
             // Create Blog
-            const newBlog = new Blog(req.body)
-            const creationResult = await newBlog.save()
+            const newBlog = {
+                ...req.body,
+                owner: userid
+            }
+            const createBlog = new Blog(newBlog)
+            const creationResult = await createBlog.save()
 
             res.status(200).json({ status: "success", "id": creationResult._id })
         } catch (err) {

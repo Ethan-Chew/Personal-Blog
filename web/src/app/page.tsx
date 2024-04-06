@@ -1,10 +1,25 @@
 'use client'
-import Navbar from "@/components/navbar";
-import { Main } from "next/document";
+import axios, { AxiosResponse } from "axios";
 import { useState, useEffect } from "react";
+import { FaFileAlt, FaClock } from "react-icons/fa";
+import Link from "next/link";
+import { Blog } from "@/helper/types";
+
+async function LoadBlogs() {
+  const loadResponse = await axios.get("http://localhost:8080/v1/blog")
+
+  return loadResponse
+}
 
 export default function Home() {
   const [ userEmail, setUserEmail ] = useState("")
+  const [ blogs, setBlogs ] = useState<Blog[]>()
+
+  useEffect(() => {
+    LoadBlogs().then((res: AxiosResponse) => {
+      setBlogs(res.data)
+    })
+  }, [])
 
   return (
     <main className="px-6 text-black h-screen">
@@ -26,7 +41,35 @@ export default function Home() {
         <hr />
       </header>
 
-
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        {blogs?.map((blog) => (
+          <BlogPreview blog={blog} key={blog._id} />
+        ))}
+      </div>
     </main>
   );
+}
+
+interface IBlogPreview {
+  blog: Blog
+}
+
+function BlogPreview({ blog }: IBlogPreview) {
+  return (
+    <Link href={`/blog/${blog._id}`}>
+      <div className="p-3 border-2 border-gray-300 rounded-xl hover:bg-gray-50">
+        <p className="text-xl font-semibold">{ blog.title }</p>
+        <div className="flex flex-row gap-4">
+          <div className="flex flex-row items-center gap-1 text-gray-700">
+            <FaFileAlt />
+            0 words
+          </div>
+          <div className="flex flex-row items-center gap-1 text-gray-700">
+            <FaClock />
+            5 minutes
+          </div>
+        </div>
+      </div>
+    </Link>
+  )
 }

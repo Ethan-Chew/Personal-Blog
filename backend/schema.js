@@ -16,10 +16,10 @@ const BlogSchema = new mongoose.Schema({
     title: { type: String, required: true },
     body: { type: String, required: true },
     dateCreated: { type: String, default: Date.now, required: true },
+    lastUpdated: { type: String, required: false },
     tags: {
         type: [String],
-        enum: ['Tech', 'Aviation', 'Dev'],
-        default: ['Dev'],
+        enum: ['school', 'aviation', 'dev', 'life'],
         required: true,
     },
     wordCount: { type: Number, required: true },

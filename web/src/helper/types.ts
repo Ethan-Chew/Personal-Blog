@@ -6,6 +6,7 @@ interface User {
 }
 
 interface Blog {
+    _id: string,
     title: string,
     body: string,
     dateCreated: string,
@@ -16,7 +17,7 @@ interface Blog {
     totalTime: Number
 }
 
-type BlogCreation = Omit<Blog, "dateCreated" | "owner" | "wordCount">
+type BlogCreation = Omit<Blog, "dateCreated" | "owner" | "wordCount" | "_id">
 
 const blogTags = [
     { label: "Aviation ✈️", value: "aviation" },

@@ -53,7 +53,7 @@ export default async function Admin() {
         user = userResponse.request
     }
 
-    if (user === null) return <></>
+    if (user === null) return <p>An error occured. sigh</p>
 
     return (
         <main className="flex flex-col min-h-screen bg-gray-100 text-black">
@@ -83,9 +83,9 @@ export default async function Admin() {
                         <div className="bg-white p-4 flex-grow">
                             <h3 className="text-xl font-semibold mb-2">Recent Posts</h3>
                             <div className="flex flex-col gap-1">
+                                {/* <BlogInfo />
                                 <BlogInfo />
-                                <BlogInfo />
-                                <BlogInfo />
+                                <BlogInfo /> */}
                             </div>
                         </div>
 
@@ -93,9 +93,9 @@ export default async function Admin() {
                         <div className="bg-white p-4 flex-grow">
                             <h3 className="text-xl font-semibold mb-2">Drafted Posts</h3>
                             <div className="flex flex-col gap-1">
-                                <BlogInfo />
-                                <BlogInfo />
-                                <BlogInfo />
+                                {blogs.map((blog: Blog) => (
+                                    <BlogInfo blog={blog} />
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -109,13 +109,15 @@ interface IBlogInfo {
     blog: Blog
 }
 
-function BlogInfo() {
+function BlogInfo({ blog }: IBlogInfo) {
     return (
-        <div>
-            <p>Some title goes here</p>
-            <div className="flex flex-row gap-2">
-                <p className="text-gray-400">100 words</p>
+        <Link href={`/admin`}>
+            <div>
+                <p>{ blog.title }</p>
+                <div className="flex flex-row gap-2">
+                    <p className="text-gray-400">{`${blog.wordCount} words`}</p>
+                </div>
             </div>
-        </div>
+        </Link>
     )
 }
