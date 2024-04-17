@@ -2,6 +2,7 @@ import axios from "axios"
 import Link from "next/link"
 import { headers, cookies } from 'next/headers'
 import { User, Blog } from "@/helper/types"
+import { BsThreeDots } from "react-icons/bs";
 
 async function getAllBlogs() {
     try {
@@ -92,9 +93,12 @@ export default async function Admin() {
                         {/* Drafted Posts Section */}
                         <div className="bg-white p-4 flex-grow">
                             <h3 className="text-xl font-semibold mb-2">Drafted Posts</h3>
-                            <div className="flex flex-col gap-1">
-                                {blogs.map((blog: Blog) => (
-                                    <BlogInfo blog={blog} />
+                            <div className="flex flex-col gap-2">
+                                {blogs.filter((tBlog: Blog) => tBlog.isDraft).map((blog: Blog) => (
+                                    <>
+                                        <BlogInfo blog={blog} />
+                                        <hr />
+                                    </>
                                 ))}
                             </div>
                         </div>
@@ -110,12 +114,19 @@ interface IBlogInfo {
 }
 
 function BlogInfo({ blog }: IBlogInfo) {
+
     return (
         <Link href={`/admin`}>
-            <div>
-                <p>{ blog.title }</p>
-                <div className="flex flex-row gap-2">
-                    <p className="text-gray-400">{`${blog.wordCount} words`}</p>
+            <div className="flex flex-row">
+                <div className="flex-grow">
+                    <p>{ blog.title }</p>
+                    <div className="flex flex-row gap-2">
+                        <p className="text-gray-400">{`${blog.wordCount} words`}</p>
+                    </div>
+                </div>
+                <div className="ml-auto">
+                    <BsThreeDots size={20} />
+
                 </div>
             </div>
         </Link>

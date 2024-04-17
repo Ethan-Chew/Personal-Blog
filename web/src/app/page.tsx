@@ -42,7 +42,7 @@ export default function Home() {
       </header>
 
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-        {blogs?.map((blog) => (
+        {blogs?.filter((tBlog) => !tBlog.isDraft).map((blog) => (
           <BlogPreview blog={blog} key={blog._id} />
         ))}
       </div>
