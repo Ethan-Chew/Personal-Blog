@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google'
 import "./globals.css";
-import NavigationBar from "./components/NavigationBar";
+import { ThemeProvider } from 'next-themes'
+import NavigationBar from "../components/NavigationBar";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -23,8 +24,10 @@ export default function RootLayout({
       <body
         className={`antialiased bg-background dark:bg-dark-background duration-150 min-h-screen ${inter.className}`}
       >
-        <NavigationBar />
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          <NavigationBar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
