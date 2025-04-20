@@ -28,7 +28,7 @@ export default async function PostCategory({
 
     return (
         <div>
-            <header className="border-b-2 border-neutral-700 py-12 px-24 min-h-[35vh] flex flex-row items-end">
+            <header className="border-b-2 border-neutral-700 py-12 px-10 md:px-24 min-h-[35vh] flex flex-row items-end">
                 <div>
                     <p className="font-bold capitalize text-secondary dark:text-dark-secondary mb-3">CATEGORY</p>
                     <h1 className="text-5xl font-bold mb-2">{ categoryPosts.name }</h1>
@@ -36,7 +36,7 @@ export default async function PostCategory({
                 </div>
             </header>
 
-            <div className="py-10 px-24">
+            <div className="py-10 px-10 md:px-24">
                 { categoryPosts.posts && categoryPosts.posts.docs?.map((post, index) => (
                     <BlogPostContainer key={index} post={post as Post} />
                 ))}

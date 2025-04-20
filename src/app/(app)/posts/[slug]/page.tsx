@@ -28,7 +28,7 @@ export default async function BlogPost({
 
     return (
         <div>
-            <header className="border-b-2 border-border dark:border-dark-border py-12 px-24 min-h-[35vh] flex flex-col justify-end">
+            <header className="border-b-2 border-border dark:border-dark-border py-12 px-10 md:px-24 min-h-[35vh] flex flex-col justify-end">
                 <div>
                     <p className="font-bold capitalize text-secondary dark:text-dark-secondary mb-3">POST</p>
                     <h1 className="text-5xl font-bold mb-2">{ post.title }</h1>
@@ -42,7 +42,7 @@ export default async function BlogPost({
             </header>
 
             {/* Main Content */}
-            <div className="px-24 py-10 content">
+            <div className="px-10 md:px-24 py-10 content">
                 <RichText data={post.content} />
             </div>
         </div>
