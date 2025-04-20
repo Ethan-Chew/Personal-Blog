@@ -5,10 +5,15 @@
 } */
 
 @theme {
-  --color-dark-background: #212121;
   --color-background: #f9f9f9;
-  --color-dark-accent: #2DC8C5;
+  --color-secondary-background: #303030;
   --color-accent: #12918F;
-  --color-dark-secondary: #d4d4d4;
+  --color-border: #404040;
   --color-secondary: #4B5563;
+
+  --color-dark-background: #212121;
+  --color-dark-secondary-background: #303030;
+  --color-dark-accent: #2DC8C5;
+  --color-dark-border: #404040;
+  --color-dark-secondary: #d4d4d4;
 }

@@ -14,6 +14,11 @@ const Tags: CollectionConfig = {
       required: true,
       unique: true,
     },
+    {
+      name: 'description',
+      type: 'text',
+      required: true
+    }
   ],
 };
 
