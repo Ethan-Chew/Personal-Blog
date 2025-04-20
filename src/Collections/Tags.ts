@@ -18,6 +18,12 @@ const Tags: CollectionConfig = {
       name: 'description',
       type: 'text',
       required: true
+    },
+    {
+      name: 'posts',
+      type: 'join',
+      collection: 'posts',
+      on: 'tags'
     }
   ],
 };

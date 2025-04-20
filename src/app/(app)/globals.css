@@ -4,11 +4,13 @@
   font-family: Arial, Helvetica, sans-serif;
 } */
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-background: #f9f9f9;
-  --color-secondary-background: #303030;
+  --color-secondary-background: #ddd;
   --color-accent: #12918F;
-  --color-border: #404040;
+  --color-border: #ddd;
   --color-secondary: #4B5563;
 
   --color-dark-background: #212121;

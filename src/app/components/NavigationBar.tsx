@@ -26,7 +26,9 @@ export default function NavigationBar() {
     return (
         <div className="flex flex-row place-content-between py-8 px-24 text-black dark:text-white">
             <div className="flex flex-row gap-5">
-                <Image src={theme === "light" ? "/ECLogoLight.svg" : "/ECLogoDark.svg"} alt="Logo" width={30} height={30} />
+                <a href="/">
+                    <Image src={theme === "light" ? "/ECLogoLight.svg" : "/ECLogoDark.svg"} alt="Logo" width={30} height={30} />
+                </a>
                 {/* <h1 className="text-4xl font-semibold">Ethan Chew</h1> */}
             </div>
 

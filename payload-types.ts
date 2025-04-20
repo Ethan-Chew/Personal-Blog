@@ -74,7 +74,11 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    tags: {
+      posts: 'posts';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
@@ -170,6 +174,11 @@ export interface Tag {
   name: string;
   slug: string;
   description: string;
+  posts?: {
+    docs?: (string | Post)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -271,6 +280,7 @@ export interface TagsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   description?: T;
+  posts?: T;
   updatedAt?: T;
   createdAt?: T;
 }
