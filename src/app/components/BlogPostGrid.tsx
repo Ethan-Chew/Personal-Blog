@@ -9,6 +9,7 @@ export default async function BlogPostGrid({ limit = Infinity }: { limit: number
     const tagsAndPosts = await payloadCMS.find({
         collection: "tags",
         pagination: false,
+        depth: 1,
         joins: {
             posts: {
                 limit: limit,
@@ -29,7 +30,7 @@ export default async function BlogPostGrid({ limit = Infinity }: { limit: number
                 <div className="flex flex-col md:flex-row place-content-between gap-5 md:gap-20 md:items-center" key={index}>
                     <div className="flex flex-row place-content-between md:place-content-evenly md:flex-col gap-3">
                         <h2 className="text-3xl font-bold">{ tag.name }</h2>
-                        <a href={`/categories/${tag.slug}`} className="cursor-pointer w-fit py-2 px-5 rounded-lg border-2 border-accent dark:border-dark-accent text-accent dark:text-dark-accent">
+                        <a href={`/categories/${tag.slug}`} className="cursor-pointer w-fit py-2 px-5 rounded-lg border-2 border-accent dark:border-dark-accent text-accent dark:text-dark-accent hover:bg-accent hover:dark:bg-dark-accent hover:text-white duration-150">
                             <div className="inline-flex flex-row gap-2 items-center">
                                 <p>See More</p>
                                 <FaChevronRight />

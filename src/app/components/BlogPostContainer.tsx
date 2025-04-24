@@ -3,7 +3,6 @@
 import ConvertISOToLocale from "@/utils/DateConverter";
 import { Post, Tag } from "../../../payload-types";
 import PostTag from "./Tag";
-import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export default function BlogPostContainer({ post }: { post: Post }) {

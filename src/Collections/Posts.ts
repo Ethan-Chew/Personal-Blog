@@ -27,11 +27,6 @@ const Posts: CollectionConfig = {
             hasMany: true,
             required: true,
         },
-        // {
-        //     name: 'coverImage',
-        //     type: 'upload',
-        //     relationTo: 'media',
-        // },
         {
             name: 'content',
             type: 'richText',
@@ -48,8 +43,8 @@ const Posts: CollectionConfig = {
             type: 'checkbox',
             required: true,
             defaultValue: true
-        }
-    ],
+        },
+    ]
 };
 
 export default Posts;
